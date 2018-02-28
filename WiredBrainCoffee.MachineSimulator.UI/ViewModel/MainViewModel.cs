@@ -1,24 +1,28 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
-using WiredBrainCoffee.MachineSimulator.UI.Model;
+using WiredBrainCoffee.EventHubSender.Model;
+using WiredBrainCoffee.EventHubSender.Sender;
 
 // ReSharper disable MemberCanBePrivate.Global
 namespace WiredBrainCoffee.MachineSimulator.UI.ViewModel
 {
     public class MainViewModel : BindableBase
     {
+        private readonly ICoffeeMachineDataSender _sender;
         private string _city;
         private int _counterCappucino;
         private int _counterEspresso;
         private string _serialNumber;
 
-        public MainViewModel()
+        public MainViewModel(ICoffeeMachineDataSender sender)
         {
             SerialNumber = Guid.NewGuid().ToString().Substring(0, 8);
             MakeCappucinoCommand = new DelegateCommand(MakeCappucino);
             MakeEspressoCommand = new DelegateCommand(MakeEspresso);
+            _sender = sender;
         }
 
         public ICommand MakeCappucinoCommand { get; }
@@ -48,20 +52,20 @@ namespace WiredBrainCoffee.MachineSimulator.UI.ViewModel
             set => SetProperty(ref _counterCappucino, value);
         }
 
-        private void MakeEspresso()
+        private async void MakeEspresso()
         {
             CounterEspresso++;
             Console.WriteLine($@"Counter Espresso: {CounterEspresso}");
             var coffeeMachineData = CreateCoffeeMachineData(nameof(CounterEspresso), CounterEspresso);
-            SendData(coffeeMachineData);
+            await SendData(coffeeMachineData);
         }
 
-        private void MakeCappucino()
+        private async void MakeCappucino()
         {
             CounterCappucino++;
             Console.WriteLine($@"Counter Cappucino: {CounterCappucino}");
             var coffeeMachineData = CreateCoffeeMachineData(nameof(CounterCappucino), CounterCappucino);
-            SendData(coffeeMachineData);
+            await SendData(coffeeMachineData);
         }
 
         private CoffeeMachineData CreateCoffeeMachineData(string sensorType, int sensorValue)
@@ -76,9 +80,9 @@ namespace WiredBrainCoffee.MachineSimulator.UI.ViewModel
             };
         }
 
-        private void SendData(CoffeeMachineData coffeeMachineData)
+        private async Task SendData(CoffeeMachineData coffeeMachineData)
         {
-            throw new NotImplementedException();
+            await _sender.SendDataAsync(coffeeMachineData);
         }
     }
 }

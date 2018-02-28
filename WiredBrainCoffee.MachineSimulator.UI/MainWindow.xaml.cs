@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using WiredBrainCoffee.EventHubSender.Sender;
 using WiredBrainCoffee.MachineSimulator.UI.ViewModel;
 
 namespace WiredBrainCoffee.MachineSimulator.UI
@@ -11,7 +12,7 @@ namespace WiredBrainCoffee.MachineSimulator.UI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(new CoffeeMachineDataSender());
         }
     }
 }

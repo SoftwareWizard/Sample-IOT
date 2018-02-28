@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WiredBrainCoffee.MachineSimulator.UI.Model
+namespace WiredBrainCoffee.EventHubSender.Model
 {
     public class CoffeeMachineData
     {
