@@ -6,9 +6,11 @@
         xmlns:viewModel="clr-namespace:WiredBrainCoffee.MachineSimulator.UI.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="525">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -46,12 +48,17 @@
 
         <GroupBox Grid.Column="1" Header="Send Periodically" Grid.Row="2" Margin="5">
             <StackPanel>
-                <CheckBox Content="Is Sending"/>
-                <TextBlock Text="Boiler Temp"/>
-                <Slider />
-                <TextBlock Text="Bean level"/>
-                <Slider />
+                <CheckBox Content="Is Sending" IsChecked="{Binding IsSending, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{Binding BoilerTemp, StringFormat='Boiler Temp {0}°C'}"/>
+                <Slider Value="{Binding BoilerTemp, Mode=TwoWay}" Maximum="100"/>
+                <TextBlock Text="{Binding BeanLevel, StringFormat='Bean Level {0}%'}"/>
+                <Slider Value="{Binding BeanLevel, Mode=TwoWay}" Maximum="100"/>
             </StackPanel>
+        </GroupBox>
+        
+        <GridSplitter Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Height="5" HorizontalAlignment="Stretch"/>
+        <GroupBox Header="Logs" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListView ItemsSource="{Binding Logs}"/>
         </GroupBox>
     </Grid>
 </Window>
