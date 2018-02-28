@@ -35,8 +35,12 @@
 
         <GroupBox Grid.Column="0" Header="Send on action" Grid.Row="2" Margin="5">
             <StackPanel >
-                <Button Content="Make cappucino" Margin="5" Command="{Binding MakeCappucinoCommand}"/>
-                <Button Content="Make espresso" Margin="5" Command="{Binding MakeEspressoCommand}"/>
+                <Button Margin="5" Command="{Binding MakeCappucinoCommand}">
+                    <TextBlock Text="{Binding CounterCappucino, StringFormat='Make Cappucino ({0})', FallbackValue='Make Cappucino'}"></TextBlock>
+                </Button>
+                <Button Margin="5" Command="{Binding MakeEspressoCommand}">
+                    <TextBlock Text="{Binding CounterEspresso, StringFormat='Make Espresso ({0})', FallbackValue='Make Espresso'}"></TextBlock>
+                </Button>
             </StackPanel>
         </GroupBox>
 

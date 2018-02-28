@@ -9,8 +9,8 @@ namespace WiredBrainCoffee.MachineSimulator.UI.ViewModel
     public class MainViewModel : BindableBase
     {
         private string _city;
-        private int _counterCappucino = 0;
-        private int _counterEspresso = 0;
+        private int _counterCappucino;
+        private int _counterEspresso;
         private string _serialNumber;
 
         public MainViewModel()
