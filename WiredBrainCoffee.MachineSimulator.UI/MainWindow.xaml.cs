@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Configuration;
+using System.Windows;
 using WiredBrainCoffee.EventHubSender.Sender;
 using WiredBrainCoffee.MachineSimulator.UI.ViewModel;
 
@@ -12,7 +13,8 @@ namespace WiredBrainCoffee.MachineSimulator.UI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(new CoffeeMachineDataSender());
+            var connectionString = ConfigurationManager.ConnectionStrings["eventHub"].ConnectionString;
+            DataContext = new MainViewModel(new CoffeeMachineDataSender(connectionString));
         }
     }
 }

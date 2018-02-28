@@ -74,7 +74,7 @@ namespace WiredBrainCoffee.MachineSimulator.UI.ViewModel
             {
                 City = City,
                 SerialNumber = SerialNumber,
-                Sensortype = sensorType,
+                SensorType = sensorType,
                 SensorValue = sensorValue,
                 RecordingTime = DateTime.Now
             };
