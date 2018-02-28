@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WiredBrainCoffee.MachineSimulator.UI"
+        xmlns:viewModel="clr-namespace:WiredBrainCoffee.MachineSimulator.UI.ViewModel"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
@@ -24,18 +25,18 @@
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <TextBlock Text="City:" Margin="5 5 0 5"/>
-            <TextBox Margin="5"/>
+            <TextBox Margin="5" Text="{Binding City, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Serial Number:" Margin="5 5 0 5"/>
-            <TextBox Margin="5"/>
+            <TextBox Margin="5" Text="{Binding SerialNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
         </DockPanel>
 
         <GroupBox Grid.Column="0" Header="Send on action" Grid.Row="2" Margin="5">
-            <StackPanel>
-                <Button Content="Make cappucino" Margin="5"/>
-                <Button Content="Make espresso" Margin="5"/>
+            <StackPanel >
+                <Button Content="Make cappucino" Margin="5" Command="{Binding MakeCappucinoCommand}"/>
+                <Button Content="Make espresso" Margin="5" Command="{Binding MakeEspressoCommand}"/>
             </StackPanel>
         </GroupBox>
 
@@ -48,7 +49,5 @@
                 <Slider />
             </StackPanel>
         </GroupBox>
-
-
     </Grid>
 </Window>
