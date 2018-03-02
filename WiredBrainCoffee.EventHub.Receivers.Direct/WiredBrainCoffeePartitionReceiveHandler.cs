@@ -26,7 +26,7 @@ namespace WiredBrainCoffee.EventHub.Receivers.Direct
                 {
                     var dataAsJson = Encoding.UTF8.GetString(eventData.Body.Array);
                     var coffeeMachineData = JsonConvert.DeserializeObject<CoffeeMachineData>(dataAsJson);
-                    Console.WriteLine($"{coffeeMachineData} | PartionId: {PartitionId}");
+                    Console.WriteLine($"{coffeeMachineData} | PartionId: {PartitionId} | Offset: { eventData.SystemProperties.Offset}");
                 }
             }
 
