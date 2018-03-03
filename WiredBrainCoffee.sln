@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.EventHub.R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.EventHub.Model", "WiredBrainCoffee.EventHub.Model\WiredBrainCoffee.EventHub.Model.csproj", "{28735062-0BDD-43E1-A910-6EAE3B802310}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.EventHub.Processor", "WiredBrainCoffee.EventHub.Processor\WiredBrainCoffee.EventHub.Processor.csproj", "{1A2F7562-85E3-482D-A2CB-F7D48BCD4D7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.EventHub.Processor", "WiredBrainCoffee.EventHub.Processor\WiredBrainCoffee.EventHub.Processor.csproj", "{1A2F7562-85E3-482D-A2CB-F7D48BCD4D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.EventHub.CaptureReceiver", "WiredBrainCoffee.EventHub.CaptureReceiver\WiredBrainCoffee.EventHub.CaptureReceiver.csproj", "{6DEAE93E-7395-4503-A0E1-B8C828809FD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1A2F7562-85E3-482D-A2CB-F7D48BCD4D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A2F7562-85E3-482D-A2CB-F7D48BCD4D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A2F7562-85E3-482D-A2CB-F7D48BCD4D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEAE93E-7395-4503-A0E1-B8C828809FD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEAE93E-7395-4503-A0E1-B8C828809FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEAE93E-7395-4503-A0E1-B8C828809FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEAE93E-7395-4503-A0E1-B8C828809FD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
