@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Hadoop.Avro;
+using Microsoft.Hadoop.Avro.Container;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Newtonsoft.Json;
+using WiredBrainCoffee.EventHub.Model;
 
 namespace WiredBrainCoffee.EventHub.CaptureReceiver
 {
@@ -27,50 +34,56 @@ namespace WiredBrainCoffee.EventHub.CaptureReceiver
             var storageAccount = CloudStorageAccount.Parse(connectionString);
             var blobClient = storageAccount.CreateCloudBlobClient();
             var blobConainer = blobClient.GetContainerReference(containerName);
-
             var resultSegment = await blobConainer.ListBlobsSegmentedAsync(null, true, BlobListingDetails.All, null, null, null, null);
-            var cloudBlockBlobs = resultSegment.Results.OfType<CloudBlockBlob>();
-            var cloudBlockBlobGroups = cloudBlockBlobs.GroupBy(item => GetPartitionId(item.Name));
 
-            foreach (var group in cloudBlockBlobGroups)
+            foreach (var cloudBlockBlob in resultSegment.Results.OfType<CloudBlockBlob>())
             {
-                Console.WriteLine($"{group.Key}");
-                foreach (var cloudBlockBlob in group)
-                {
-                    await ProcessCloudBlockBlobAsync(group.Key, cloudBlockBlob);
-                }
+                await ProcessCloudBlockBlobAsync(cloudBlockBlob);
             }
 
             Console.ReadLine();
         }
 
-
-        private static async Task ProcessCloudBlockBlobAsync(string partitionId, CloudBlockBlob cloudBlockBlob)
+        private static async Task ProcessCloudBlockBlobAsync(CloudBlockBlob cloudBlockBlob)
         {
-            const string rootPath = @"C:\Temp\blobStorage\";
-            var path = Path.Combine(rootPath, partitionId);
+            List<AvroRecord> avroRecords = await DownloadAvroRecordAsync(cloudBlockBlob);
+            PrintCoffeeMachineDatas(avroRecords);
+            await cloudBlockBlob.DeleteAsync();
+        }
 
-            if (!Directory.Exists(path))
+        private static async Task<List<AvroRecord>> DownloadAvroRecordAsync(CloudBlockBlob cloudBlockBlob)
+        {
+            var memoryStream = new MemoryStream();
+            await cloudBlockBlob.DownloadToStreamAsync(memoryStream);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            List<AvroRecord> avroRecords;
+            using (var reader = AvroContainer.CreateGenericReader(memoryStream))
             {
-                Directory.CreateDirectory(path);
+                using (var sequentialReader = new SequentialReader<object>(reader))
+                {
+                    avroRecords = sequentialReader.Objects.OfType<AvroRecord>().ToList();
+                }
             }
 
-            var filename = CreateFilename(cloudBlockBlob.Name);
-            var filePath = $@"{path}\{filename}";
-
-            Console.WriteLine(filePath);
-            await cloudBlockBlob.DownloadToFileAsync(filePath, FileMode.Create);
+            return avroRecords;
         }
 
-        private static string GetPartitionId(string name)
+        private static CoffeeMachineData CreateCoffeeMachineData(AvroRecord avroRecord)
         {
-            return name.Split('/')[2];
+            var body = avroRecord.GetField<byte[]>("Body");
+            var dataAsJson = Encoding.UTF8.GetString(body);
+            var coffeeMachineData = JsonConvert.DeserializeObject<CoffeeMachineData>(dataAsJson);
+            return coffeeMachineData;
         }
 
-        private static string CreateFilename(string name)
+        private static void PrintCoffeeMachineDatas(List<AvroRecord> avroRecords)
         {
-            var tokens = name.Split('/');
-            return $"{tokens[5]}-{tokens[4]}-{tokens[3]}_{tokens[6]}{tokens[7]}_{tokens[8]}";
+            var coffeeMachineDatas = avroRecords.Select(CreateCoffeeMachineData);
+
+            foreach (var coffeeMachineData in coffeeMachineDatas)
+            {
+                Console.WriteLine(coffeeMachineData);
+            }
         }
     }
 }
