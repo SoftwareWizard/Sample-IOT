@@ -33,7 +33,7 @@ namespace WiredBrainCoffee.EventHub.Receivers.Direct
 
             var partitionReceivers = runTimeInformation
                 .PartitionIds
-                .Select(id => _eventHubClient.CreateReceiver("wired_brain_coffee_console_direct", id, EventPosition.FromEnqueuedTime(DateTime.Now) ));
+                .Select(id => _eventHubClient.CreateReceiver("$Default", id, EventPosition.FromEnqueuedTime(DateTime.Now) ));
 
             Console.WriteLine("Waiting for incoming Data");
             foreach (var partitionReceiver in partitionReceivers)
