@@ -15,7 +15,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.EventHub.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.EventHub.CaptureReceiver", "WiredBrainCoffee.EventHub.CaptureReceiver\WiredBrainCoffee.EventHub.CaptureReceiver.csproj", "{6DEAE93E-7395-4503-A0E1-B8C828809FD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiredBrainCoffee.FunctionApp", "WiredBrainCoffee.FunctionApp\WiredBrainCoffee.FunctionApp.csproj", "{FD632BF1-027F-466A-A41B-BBDBABB3DE05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WiredBrainCoffee.FunctionApp", "WiredBrainCoffee.FunctionApp\WiredBrainCoffee.FunctionApp.csproj", "{FD632BF1-027F-466A-A41B-BBDBABB3DE05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3E25D69-EF4F-4C81-B502-EC2B59C26525}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

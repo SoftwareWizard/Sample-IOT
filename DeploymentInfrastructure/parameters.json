@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_dropbox_name": {
+            "value": null
+        },
+        "connections_eventhubs_name": {
+            "value": null
+        },
+        "connections_eventhubs_1_name": {
+            "value": null
+        },
+        "sites_WiredBrainCoffeeFunctionApp1_name": {
+            "value": null
+        },
+        "serverfarms_WiredBrainCoffeeFunctionApp_name": {
+            "value": null
+        },
+        "namespaces_WiredBrainCoffeeEh_Nspace_name": {
+            "value": null
+        },
+        "workflows_WiredBrainCoffeeAlertLogicApp_name": {
+            "value": null
+        },
+        "storageAccounts_a188af25e69384b0a9348168_name": {
+            "value": null
+        },
+        "storageAccounts_wiredbraincoffeecapture1_name": {
+            "value": null
+        },
+        "storageAccounts_wiredbraincoffeestorage1_name": {
+            "value": null
+        },
+        "config_web_name": {
+            "value": null
+        },
+        "eventhubs_wiredbraincoffeeeh_name": {
+            "value": null
+        },
+        "eventhubs_wiredbraincoffeealerteh_name": {
+            "value": null
+        },
+        "AuthorizationRules_SendAndListenPolicy_name": {
+            "value": null
+        },
+        "AuthorizationRules_RootManageSharedAccessKey_name": {
+            "value": null
+        },
+        "consumergroups_$Default_name": {
+            "value": null
+        },
+        "hostNameBindings_wiredbraincoffeefunctionapp1.azurewebsites.net_name": {
+            "value": null
+        },
+        "consumergroups_$Default_name_1": {
+            "value": null
+        },
+        "consumergroups_stream_analytics_job_name": {
+            "value": null
+        },
+        "authorizationRules_SendAndListenPolicy_name_1": {
+            "value": null
+        },
+        "authorizationRules_SendAndListenPolicy_name_2": {
+            "value": null
+        },
+        "consumergroups_wired_brain_coffee_alert_function_name": {
+            "value": null
+        },
+        "consumergroups_wired_brain_coffee_console_direct_name": {
+            "value": null
+        },
+        "consumergroups_wired_brain_coffee_console_processor_name": {
+            "value": null
+        },
+        "consumergroups_wired_brain_coffee_alert_logicapp_name": {
+            "value": null
+        }
+    }
+}
